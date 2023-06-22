@@ -1,0 +1,30 @@
+<nav class="navbar navbar-dark navbar-expand-sm" id="mynav">
+    <a href="" class="navbar-brand" id="welcome"><span class="bi bi-house"></span></a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navb">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navb">
+        <ul class="navbar-nav">
+            <li class="nav-item" [hidden]="logged==false || route=='admin' "><a [href]="route" class="nav-link">Profil</a></li>
+            <li class="nav-item" [hidden]="logged==false || route!='participant'"><a href="myworksh" class="nav-link">Radionice</a></li>
+            <li class="nav-item" [hidden]="logged==false || route!='participant'"><a href="addworksh" class="nav-link">Postani organizator</a></li>
+            <li class="nav-item" [hidden]="logged==false || route!='organizer'"><a href="addworksh" class="nav-link">Predlozi radionicu</a></li>
+            <li class="nav-item" [hidden]="logged==false || route!='admin' "><a href="requests" class="nav-link">Pregled sistema</a></li>
+        </ul> 
+       
+        <ul class="navbar-nav float-sm-right">
+          <li class="nav-item" [hidden]="logged==true"><a href="login" class="nav-link">Uloguj se </a></li>
+          <li class="nav-item" [hidden]="logged==true"><a href="register" class="nav-link">Registruj se</a></li>
+          <li class="nav-item" [hidden]="logged==false"><a href="changepass" class="nav-link">Promeni lozinku</a></li>
+          <li class="nav-item" [hidden]="logged==false"><a href=""  (click)="logout()" class="nav-link">Izloguj se</a></li>
+        </ul>
+    </div>
+  </nav>
+  
+  <div class=" container" id="myapp"> 
+    
+      <router-outlet></router-outlet>
+  </div>
+  <div id="footer">
+    <i>Iva Potkonjak 0301/19</i>
+  </div>

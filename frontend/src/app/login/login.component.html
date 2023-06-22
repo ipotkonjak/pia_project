@@ -1,0 +1,41 @@
+<div class="row">
+<div class="col-sm-12 text-center" id="logcont" >
+    <div id="loginform">
+        <h3>Prijavite se</h3>
+        <table >
+            <tr>
+                <td><b>Username:</b></td>
+                <td><input type="text" [(ngModel)]="username"></td>
+            </tr>
+            <tr>
+                <td><b>Password:</b></td>
+                <td><input type="password" [(ngModel)]="password"> <br>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td id="forgotpass" colspan="2">
+                    <a [routerLink]="['/resetpass']">
+                    Zaboravili ste lozinku?
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td id="buttontd" colspan="2">
+                    <button class="btn btndet " (click)="login()">Login</button> <br>
+                   <span style="color: #C8553D; font-weight: bold;">{{msg}}</span> 
+                </td>
+            </tr>
+        </table>
+        <div class="text-center">
+            Ukoliko nemate nalog registrujte se <a [routerLink]="['/register']">
+                ovde.
+                </a>
+        </div>
+    </div>
+    
+
+</div>
+
+
+</div>

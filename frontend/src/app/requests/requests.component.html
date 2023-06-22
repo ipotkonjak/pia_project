@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-sm-1">
+    <div id="mySidebar" class="sidebar">
+        <ul class="list-group">
+            <li class="list-group-item" [class]="chosen == 'users' ? 'active' : ''" (click)="choose('users')">Korisnici</li>
+            <li class="list-group-item" [class]="chosen == 'userreq' ? 'active' : ''" (click)="choose('userreq')">Zahtevi za registraciju</li>
+            <li class="list-group-item" [class]="chosen == 'worksh' ? 'active' : ''" (click)="choose('worksh')">Radionice</li>
+            <li class="list-group-item" [class]="chosen == 'workshreq' ? 'active' : ''" (click)="choose('workshreq')">Predlozi radionica</li>
+           
+            <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
+                <button class="closebtn btn" (click)="closeNav()">&times;</button>
+            </div>
+        
+        </ul>
+      </div>
+  </div>
+  <div class="col-sm-12" >
+    <div style="display: flex; justify-content: flex-end; width: 70%; margin: auto;">
+      
+      <div class="addadmin" *ngIf="chosen == 'users'">
+        <button class="btn btnlike " (click)="addUser()">Dodaj korisnika</button>
+      </div> 
+      <div class="addadmin" *ngIf="chosen == 'worksh'">
+        <button class="btn btnlike " (click)="addWorkshop()">Dodaj radionicu</button>
+      </div>
+      <button (click)="openNav()" class="btn btnlike">Meni</button>
+    </div>
+    <div *ngIf="chosen == 'users'" >
+      
+      <div id="requests"  *ngFor="let u of usersAccepted">
+        <table class="text-center" style="width: 100%;">
+            <tr id="req">
+                <td style="vertical-align: middle; font-weight: bold; width: 50%;">{{u.username}}</td>
+                <td>
+                  <button class="btn btndet" (click)="changeUser(u.username)">Izmeni</button> <button class="btn btn-danger" (click)="deleteUser(u.username)">Obrisi</button>    
+                </td>
+            </tr>
+        </table>
+      </div>
+      
+          
+    </div>
+    <div *ngIf="chosen == 'userreq'">
+      <div id="requests"  *ngFor="let u of usersWaiting">
+        <table class="text-center" style="width: 100%;">
+            <tr id="req">
+                <td style="vertical-align: middle; font-weight: bold; width: 50%;">{{u.username}}</td>
+                <td>
+                  <button class="btn btndet" (click)="acceptUser(u.username)">Prihvati</button> <button class="btn btn-danger" (click)="rejectUser(u.username)">Odbij</button>
+                  
+                </td>
+            </tr>
+        </table>
+      </div>
+      
+    </div>
+    <div *ngIf="chosen == 'worksh'">
+      <div id="requests"  *ngFor="let w of workshopsAccepted">
+        <table class="text-center" style="width: 100%;">
+            <tr id="req">
+                <td style="vertical-align: middle; font-weight: bold; width: 50%;">{{w.name}}</td>
+                <td>
+                  <button class="btn btndet" (click)="changeWorkshop(w.idW)">Izmeni</button> <button class="btn btn-danger" (click)="deleteWorkshop(w.idW)">Obrisi</button>
+                  
+                </td>
+            </tr>
+        </table>
+      </div>
+      
+      
+    </div>
+    <div *ngIf="chosen == 'workshreq'">
+      <div id="requests"  *ngFor="let w of workshopsWaiting">
+        <table class="text-center" style="width: 100%;">
+            <tr id="req">
+                <td style="vertical-align: middle; font-weight: bold; width: 50%;">{{w.name}}</td>
+                <td>
+                  <button class="btn btndet" (click)="acceptWorkshop(w.idW, w.organizer)" [disabled]="!w.allow">Prihvati</button> <button class="btn btn-danger" (click)="rejectWorkshop(w.idW)">Odbij</button>
+                </td>
+            </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+<div class="row text-center">
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <h3>Korisnici</h3>
+        
+        
+        
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <h3>Zahtevi za registraciju</h3>
+        
+        
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <h3>Radionice</h3>
+        
+        
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12">
+        <h3>Predlozi radionica</h3>
+        
+        
+    </div>
+</div>
+
+
+ -->

@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-sm-12 text-center" id="addcont">
+        <div id="addform">
+            <h3>Nova radionica</h3>
+            <table>
+                <tr>
+                    <td><b>Naziv:</b></td>
+                    <td><input type="text" [(ngModel)]="name"></td>
+                </tr>
+                <tr>
+                    <td><b>Datum odrzavanja:</b></td>
+                    <td><input type="date" [(ngModel)]="date"> <input type="time" [(ngModel)]="time"></td>
+                </tr>
+                <tr>
+                    <td><b>Mesto odrzavanja:</b></td>
+                    <td><input type="text" [(ngModel)]="place"></td>
+                </tr>
+                <tr>
+                    <td><b>Kratak opis:</b></td>
+                    <td><input type="text" [(ngModel)]="shortDescr"></td>
+                </tr>
+                <tr>
+                    <td><b>Duzi opis:</b></td>
+                    <td><textarea cols="50" rows="5" [(ngModel)]="longDescr"></textarea></td>
+                </tr>
+                <tr>
+                    <td><b>Glavna slika:</b></td>
+                    <td>
+                        <input type="file" id="photo" (change)="getPhoto($event, 0)" #fileUploadConvert />
+                        <label for="photo"
+                            class="coverlabel">
+                            Dodaj sliku
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(0)" [disabled]="mainPhoto ==''"><span class='bi bi-trash-fill'></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Broj mesta:</b></td>
+                    <td><input type="number" [(ngModel)]="availableSpots"></td>
+                </tr>
+                <tr>
+                    <td><b>Dodatne slike:</b></td>
+                    <td>
+                        <input type="file" id="photo1" (change)="getPhoto($event, 1)" #fileUploadConvert />
+                        <label for="photo1"
+                            class="coverlabel">
+                            Dodaj sliku 1
+                        </label>  <button class="btn btn-danger del" (click)="remove(1)" [disabled]="photo1 ==''"><span class='bi bi-trash-fill'></span></button> <br>
+                        <input type="file" id="photo2" (change)="getPhoto($event, 2)" #fileUploadConvert />
+                        <label for="photo2"
+                            class="coverlabel">
+                            Dodaj sliku 2
+                        </label>  <button class="btn btn-danger del" (click)="remove(2)" [disabled]="photo2 ==''"><span class='bi bi-trash-fill'></span></button> <br>
+                        <input type="file" id="photo3" (change)="getPhoto($event, 3)" #fileUploadConvert />
+                        <label for="photo3"
+                            class="coverlabel">
+                            Dodaj sliku 3
+                        </label> <button class="btn btn-danger del" (click)="remove(3)" [disabled]="photo3 ==''"><span class='bi bi-trash-fill'></span></button> <br>
+                        <input type="file" id="photo4" (change)="getPhoto($event, 4)" #fileUploadConvert />
+                        <label for="photo4"
+                            class="coverlabel">
+                            Dodaj sliku 4
+                        </label> <button class="btn btn-danger del" (click)="remove(4)" [disabled]="photo4 ==''"><span class='bi bi-trash-fill'></span></button> <br>
+                        <input type="file" id="photo5" (change)="getPhoto($event, 5)" #fileUploadConvert />
+                        <label for="photo5"
+                            class="coverlabel">
+                            Dodaj sliku 5
+                        </label>  <button class="btn btn-danger del" (click)="remove(5)" [disabled]="photo5 ==''"><span class='bi bi-trash-fill'></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="buttontd" colspan="2">
+                        <input type="file" id="json" (change)="getTemplate($event)" />
+                        <label for="json" class="coverlabel" id="template">
+                            Ucitaj sablon
+                        </label>
+                        <button class="btn btndet" (click)="add()">Dodaj radionicu</button> <br>
+                        <b>{{msg}}</b>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>

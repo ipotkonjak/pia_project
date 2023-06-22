@@ -1,0 +1,87 @@
+<div class="row">
+    
+    <div class="col-lg-12" id="updcont">
+        
+        <div id="updform" class="text-center">
+            <h3>Azuriraj radionicu</h3>
+            <table>
+                <tr>
+                    <td class="upd"><b>Naziv:</b></td>
+                    <td class="upd"><input type="text" [(ngModel)]="changes.name"></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Datum odrzavanja:</b></td>
+                    <td class="upd"><input type="datetime" [(ngModel)]="changes.date"></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Mesto odrzavanje:</b></td>
+                    <td class="upd"><input type="text" [(ngModel)]="changes.place"></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Kratak opis:</b></td>
+                    <td class="upd"><input type="text" [(ngModel)]="changes.shortDescr"></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Duzi opis:</b></td>
+                    <td class="upd"><textarea cols="30" rows="5" [(ngModel)]="changes.longDescr"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Glavna slika:</b></td>
+                    <td class="upd">
+                        <input type="file" id="photo" (change)="getPhoto($event, 0)" #fileUploadConvert />
+                        <label for="photo"
+                            class="coverlabel">
+                            Dodaj sliku
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(0)" [disabled]="changes.mainPhoto ==''"><span class='bi bi-trash-fill'></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Dodatne slike:</b></td>
+                    <td class="upd">
+                        <input type="file" id="photo1" (change)="getPhoto($event, 1)" #fileUploadConvert />
+                        <label for="photo1"
+                            class="coverlabel">
+                            Dodaj sliku 1
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(1)" [disabled]="photo1 ==''"><span class='bi bi-trash-fill'></span></button>
+                         <br>
+                        <input type="file" id="photo2" (change)="getPhoto($event, 2)" #fileUploadConvert />
+                        <label for="photo2"
+                            class="coverlabel">
+                            Dodaj sliku 2
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(2)" [disabled]="photo2 ==''"><span class='bi bi-trash-fill'></span></button>
+                        <br>
+                        <input type="file" id="photo3" (change)="getPhoto($event, 3)" #fileUploadConvert />
+                        <label for="photo3"
+                            class="coverlabel">
+                            Dodaj sliku 3
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(3)" [disabled]="photo3 ==''"><span class='bi bi-trash-fill'></span></button>
+                        <br>
+                        <input type="file" id="photo4" (change)="getPhoto($event, 4)" #fileUploadConvert />
+                        <label for="photo4"
+                            class="coverlabel">
+                            Dodaj sliku 4
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(4)" [disabled]="photo4 ==''"><span class='bi bi-trash-fill'></span></button>
+                        <br>
+                        <input type="file" id="photo5" (change)="getPhoto($event, 5)" #fileUploadConvert />
+                        <label for="photo5"
+                            class="coverlabel">
+                            Dodaj sliku 5
+                        </label> 
+                        <button class="btn btn-danger del" (click)="remove(5)" [disabled]="photo5 ==''"><span class='bi bi-trash-fill'></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="upd text-center" >
+                        <button class="btn btndet" (click)="updateWorksh()">Azuriraj</button> <button class="btn btn-danger" (click)="discard()">Otkazi</button> <br>
+                        {{msg}}
+                    </td>
+            </table>
+        </div>
+       
+    </div>
+</div>

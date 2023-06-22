@@ -1,0 +1,91 @@
+<div class="row all">
+    <div class="col-lg-8 col-md-12 col-sm-12">
+        <h3>Radionice</h3>
+        
+        
+        <table id="outertab" class="text-left">
+            <tr>
+                <td colspan="5">
+                    <span>Naziv: <input class="srchfld" type="text" [(ngModel)]="name"></span>
+                    <span>Mesto: <input class="srchfld" type="text" [(ngModel)]="place"> </span>
+                    <button id="srch" class="btn btndet btn-change " (click)="search()">Pretraga</button>
+                </td>
+                <td>
+                    <select id="srt" [(ngModel)]="sorting" (change)="sortWorkshops()">
+                        <option value="" disabled selected hidden>Sortiraj</option>
+                        <option value="name">Naziv</option>
+                        <option value="date">Datum</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+               <td colspan="6">
+                <div id="cards" class="card" *ngFor="let w of workshops">
+            
+                    <div class="card-body">
+                        <table id="cardcont">
+                            <tr>
+                                <td rowspan="2">
+                                    <img class="rounded" [src]="w.mainPhoto== '' ? '../../assets/gallery_photo.jpg' : w.mainPhoto" height="100px" width="100px">
+                                </td>
+                                <td id="middlecont">
+                                    <div id="wrkshname">{{w.name}}</div>
+                                    <div>
+                                        Mesto: {{w.place}} <br>
+                                        Vreme: {{w.date | date : 'dd-MM-yyyy HH:mm'}} <br>
+                                        Ukratko o nama: {{w.shortDescr}}
+                                    </div>
+        
+                                </td>
+                                <td rowspan="2">
+                                    <button class="btn btndet" (click)="details(w.idW)" [disabled]="user == null">Detalji</button>
+                                </td>
+                            </tr>
+                        </table>
+                     </div>
+                    </div>
+               </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+    <div class="col-lg-4 col-md-12 col-sm-12" >
+        <div id="top5">
+            <h3>Top pet radionica</h3>
+            <table class="text-center" id="tab5">
+                <tr>
+                    <th></th>
+                    <th>Fotografija</th>
+                    <th>Naziv</th>
+                    <!-- <th>Datum</th> -->
+                    <!-- <th>Mesto</th> -->
+                    <th>Opis</th>
+                    <!-- <th>Detalji</th> -->
+                </tr>
+                <tr *ngFor="let w of topFive; index as i" id="oneline">
+                    <td>{{i + 1}}.</td>
+                    <td>
+                        <img class="img rounded-circle" [src]="w.mainPhoto" width="50px" height="50px" />
+                    </td>
+                    <td>{{w.name}}</td>
+                    <!-- <td>{{w.date | date : 'dd-MM-yyyy'}}</td> -->
+                    <!-- <td>{{w.place}}</td> -->
+                    <td>{{w.shortDescr}}</td>
+                    <td>
+                        <button class="btn btndet" (click)="details(w.idW)" [disabled]="user == null">Detalji</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+
+
+    </div>
+
+
+
+
+</div>

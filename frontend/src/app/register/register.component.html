@@ -1,0 +1,126 @@
+<div class="row">
+<div class="col-sm-12 text-center" id="regcont">
+    <div id="regform">
+        <h3 *ngIf="admin == null">Registrujte se</h3>
+        <h3 *ngIf="admin != null">Novi korisnik</h3>
+        <table>
+            <tr>
+                <td><b>Korisnicko ime:</b></td>
+                <td> <input type="text" [(ngModel)]="username" /> </td>
+            </tr>
+            <tr>
+                <td><b>Lozinka:</b></td>
+                <td> <input type="password" [(ngModel)]="password" /> </td>
+            </tr>
+            <tr>
+                <td><b>Potvrda lozinke:</b></td>
+                <td> <input type="password" [(ngModel)]="confirmPass" /> </td>
+            </tr>
+            <tr>
+                <td><b>Ime:</b></td>
+                <td> <input type="text" [(ngModel)]="firstname" /> </td>
+            </tr>
+            <tr>
+                <td><b>Prezime:</b></td>
+                <td> <input type="text" [(ngModel)]="lastname" /> </td>
+            </tr>
+            
+            
+            <tr>
+                <td><b>Email:</b></td>
+                <td> <input type="text" [(ngModel)]="email" /> </td>
+            </tr>
+        
+            <tr>
+                <td><b>Telefon:</b></td>
+                <td> <input type="text" [(ngModel)]="tel" /> </td>
+            </tr>
+        
+            
+        
+            <tr>
+                <td><b>Profilna slika:</b></td>
+                <td>
+                    <input type="file" id="photo" (change)="getPhoto($event)" #fileUploadConvert />
+                    <label for="photo"
+                        class="coverlabel">
+                        Dodaj sliku
+                    </label>
+                    <button class="btn btn-danger del" (click)="remove()" [disabled]="photo ==''"><span class='bi bi-trash-fill'></span></button>
+                </td>
+        
+            </tr>
+            <tr>
+                <td><b>Tip korisnika:</b></td>
+                <td>
+                    <select [(ngModel)]="type">
+                        <option value="participant">Ucesnik</option>
+                        <option value="organizer">Organizator</option>
+                    </select>
+                </td>
+            </tr>
+            <tr *ngIf="type == 'organizer'">
+                <td><b>Naziv organizacije:</b></td>
+                <td><input type="text" [(ngModel)]="orgName" /></td>
+            </tr>
+            <tr *ngIf="type == 'organizer'">
+                <td><b>Adresa organizacije:</b></td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><b>Drzava:</b></td>
+                            <td><input type="text" [(ngModel)]="country" /></td>
+                        </tr>
+                        <tr>
+                            <td><b>Grad:</b></td>
+                            <td><input type="text" [(ngModel)]="city" /></td>
+                        </tr>
+                        <tr>
+                            <td><b>Postanski broj:</b></td>
+                            <td><input type="number" [(ngModel)]="postalCode" /></td>
+                        </tr>
+                        <tr>
+                            <td><b>Ulica:</b></td>
+                            <td><input type="text" [(ngModel)]="street" /></td>
+                        </tr>
+                        <tr>
+                            <td><b>Broj:</b></td>
+                            <td><input type="number" [(ngModel)]="streetNumber" /></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr *ngIf="type == 'organizer'">
+                <td><b>Maticni broj:</b></td>
+                <td><input type="text" [(ngModel)]="orgNumber" /></td>
+            </tr>
+            <tr>
+                <td id="buttontd" colspan="2" *ngIf="admin == null">
+                    <button class="btn btndet" (click)="register()">Registruj se</button>
+                </td>
+                <td id="buttontd" colspan="2" *ngIf="admin != null">
+                    <button class="btn btndet" (click)="register()">Dodaj korisnika</button>
+                </td>
+        
+            </tr>
+            
+        
+            
+        
+        </table>
+        
+        <p style="color: #C8553D; font-weight: bold;">{{msg}}</p>
+        <p style="color: green; font-weight: bold;">{{msgSuccess}}</p>
+
+        <div class=" text-center" *ngIf="admin == null">
+            Vec imate nalog? Prijavite se <a [routerLink]="['/login']">
+                ovde.
+                </a>
+        </div>
+    </div>
+
+
+
+</div>
+
+</div>

@@ -1,0 +1,22 @@
+#welcome {
+    padding-left: 15px;
+}
+#mynav {
+    background-color: #588b8b;
+    z-index: 8;
+    width: 100%;
+    position: fixed;
+}
+#myapp {
+    padding: 58px 0 0;
+    padding-bottom: 25px;
+}
+
+#footer {
+    background-color: #588b8b;
+    z-index: 8;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    text-align: center;
+}

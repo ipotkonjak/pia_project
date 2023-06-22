@@ -1,0 +1,73 @@
+#tab5 {
+    border-collapse: separate;
+    border-spacing: 0 7px;
+  }
+ #srt {
+    padding: 5px;
+    vertical-align: middle;
+}
+
+#srch {
+    padding: 5px;
+    margin-left: 2px;
+}
+
+.srchfld {
+    vertical-align: middle;
+}
+
+th, td {
+    padding: 5px;
+}
+
+#wrkshname {
+    font-weight: bold;
+    font-size: larger;
+}
+
+#outertab {
+    width: 90%;
+}
+
+#cardcont {
+    width: 100%;
+}
+
+#middlecont {
+    width: 60%;
+    text-align: left;
+    vertical-align: text-top;
+    word-wrap: break-word;
+}
+
+#cards {
+    margin-top: 7px;
+    background-color: #ffd5c2;
+}
+
+.btndet {
+    background: #588b8b;
+    color: white;
+}
+.btndet:hover{
+    background: #79A9A9;
+}
+
+#top5 {
+    background-color: #C8553D;
+    margin-top: 20px;
+    border-radius: 5px;
+    padding: 15px;
+    color: white;
+
+    width: fit-content;
+}
+
+.all {
+    margin-top: 5px;
+}
+
+#oneline {
+    background-color: #f28f3b;
+    
+}

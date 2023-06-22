@@ -1,0 +1,65 @@
+#chathdr, #chatftr {
+    display: flex;
+    justify-content: space-between;
+    vertical-align: middle;
+}
+
+#chatorg {
+    display: flex;
+    /* justify-content: center; */
+    align-content: center;
+    /* flex-direction: column; */
+    vertical-align: middle;
+}
+
+#msginput {
+    display: flex;
+    /* justify-content: center; */
+    align-content: center;
+    /* flex-direction: column; */
+    vertical-align: middle;
+}
+
+#msgs {
+    height: 300px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.goleft {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.goright {
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.imgs {
+    vertical-align: middle;
+}
+
+#chat {
+    margin-top: 10px;
+}
+
+.mybtn {
+    text-align: left;
+}
+
+.active {
+    background-color: #c8553d;
+    border-color: #c8553d;
+  }
+
+  .btndet {
+    background: #588b8b;
+    color: white;
+    margin-right: 2px;
+}
+.btndet:hover{
+    background: #79A9A9;
+}

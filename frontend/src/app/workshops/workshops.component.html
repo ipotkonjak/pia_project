@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-sm-12 text-center">
+        <h3>Aktivne prijave za radionice</h3>
+        <div style="display: flex; justify-content: center;">
+            <table id="outertab" class="text-left">
+                <tr style="text-align: right;">
+                    <td>
+                        <select id="srt" [(ngModel)]="sorting" (change)="sortWorkshops()">
+                            <option value="" disabled selected hidden>Sortiraj</option>
+                            <option value="name">Naziv</option>
+                            <option value="date">Datum</option>
+                            <option value="place">Mesto</option>
+                            <option value="descr">Opis</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                   <td>
+                    <div id="cards" class="card" *ngFor="let w of workshops">
+                
+                        <div class="card-body">
+                            <table id="cardcont">
+                                <tr>
+                                    <td rowspan="2">
+                                        <img class="rounded" [src]="w.mainPhoto== '' ? '../../assets/gallery_photo.jpg' : w.mainPhoto" height="100px" width="100px">
+                                    </td>
+                                    <td id="middlecont">
+                                        <div id="wrkshname">{{w.name}}</div>
+                                        <div>
+                                            Mesto: {{w.place}} <br>
+                                            Vreme: {{w.date | date : 'dd-MM-yyyy HH:mm'}} <br>
+                                            Ukratko o nama: {{w.shortDescr}}
+                                        </div>
+            
+                                    </td>
+                                    <td rowspan="2">
+                                        <button class="btn btndet" (click)="clear(w.idW)" *ngIf="compare(w.date, date)">Odjavi me</button>
+                                    </td>
+                                </tr>
+                            </table>
+                         </div>
+                        </div>
+                   </td>
+                </tr>
+            </table>
+        </div>
+        
+        
+        
+        <!-- <table >
+            <tr>
+                <th>Fotografija</th>
+                <th>Naziv</th>
+                <th>Datum</th>
+                <th>Mesto</th>
+                <th>Opis</th>
+                <td>
+                    <select id="srt" [(ngModel)]="sorting" (change)="sortWorkshops()">
+                        <option value="" disabled selected hidden>Sortiraj</option>
+                        <option value="name">Naziv</option>
+                        <option value="date">Datum</option>
+                        <option value="place">Mesto</option>
+                        <option value="descr">Opis</option>
+                    </select>
+                </td>
+            </tr>
+            <tr *ngFor="let w of workshops">
+                <td>
+                    <img class="img" [src]="w.mainPhoto" width="100px" height="100px" />
+                </td>
+                <td>{{w.name}}</td>
+                <td>{{w.date | date : 'dd-MM-yyyy'}}</td>
+                <td>{{w.place}}</td>
+                <td>{{w.shortDescr}}</td>
+                <td>
+                    <button class="btn btn-info" (click)="clear(w.idW)" *ngIf="compare(w.date, date)">Odjavi me</button>
+                </td>
+            </tr>
+        </table> -->
+    </div>
+</div>
+

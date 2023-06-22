@@ -1,0 +1,276 @@
+<div class="row" id="all">
+    <div class="col-lg-12">
+        <h3>{{workshop.name}}</h3>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12" *ngIf="!updateInProgress">
+        
+        <table>
+            <tr>
+                <td>
+                    <div *ngIf="workshop.gallery.length > 0" class="d-flex justify-content-center">
+                        <div id="gallery" class="carousel" data-bs-ride="carousel" >
+                            <div class="carousel-inner">
+                                <div class="carousel-item " *ngFor="let ph of workshop.gallery;index as i" [class.active]="i==0">
+                                    <img [src]="ph" height="350px" width="350px" />
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" data-bs-target="#gallery" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" data-bs-target="#gallery" data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf="workshop.gallery.length == 0" >
+                        <img src="../../assets/gallery_photo.jpg" height="350px" width="350px" />
+                    </div>
+                </td>
+                <td>
+                    <table>
+                        <tr>
+                            <td>Datum:</td>
+                            <td>{{workshop.date | date : 'dd-MM-yyyy HH:mm'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mesto:</td>
+                            <td>{{workshop.place}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" id="descr">
+                                <div class="overflow-auto">
+                                    {{workshop.longDescr}}
+                                </div>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="col-sm-12 col-md-12 "> 
+                        <button class="btn btndet" *ngIf="!flag && workshop.availableSpots > 0 && user.type == 'participant'" (click)="addWaiting()">Prijavi me</button>
+                        <button class="btn btndet" *ngIf="!flag && workshop.availableSpots == 0 && user.type == 'participant' " (click)="addToNotify()">Obavesti me kada se oslobodi mesto</button>
+                        <button *ngIf="user.type == 'participant' " (click)="openChat()" class="btn btndet">Posalji poruku</button>
+                    
+
+                        <button class="btn btndet" *ngIf="flag && user.type != 'participant'" (click)="update()">Izmeni</button>
+                        <button class="btn btndet" *ngIf="user.username == workshop.organizer && user.type != 'participant'">
+                            <a [href]="data" download="{{workshop.name}}.json" data="workshop" style="color: white; text-decoration: none;" >Preuzmi sablon</a>
+                        </button>
+                        <button class="btn btn-danger" *ngIf="user.username == workshop.organizer && user.type != 'participant'" (click)="cancel()">Otkazi</button>
+                        
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="col-sm-12 col-md-12 "> 
+           
+        
+                        <div id="myMap" [(ngModel)]="map"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+       
+        
+        
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12" *ngIf="!updateInProgress">
+        
+        <div class="col-sm-12 col-md-12 " *ngIf="user.username == workshop.organizer && user.type != 'participant'">
+            <h3>Zahtevi</h3>
+            <div id="requests"  *ngFor="let u of workshop.waiting">
+                <table class="text-center" style="width: 100%;">
+                    <tr id="req">
+                        <td style="vertical-align: middle; font-weight: bold;">{{u}}</td>
+                        <td>
+                            <button class="btn btndet" (click)="accept(u)">Prihvati</button> <button class="btn btn-danger" (click)="decline(u)">Odbij</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            
+        </div>
+        
+        <div class="col-sm-12 col-md-12 " *ngIf="user.type == 'participant'" id="commssec">
+            <!-- <div *ngIf="!sendingMessage"> -->
+                <table>
+                    <tr>
+                        <td style="vertical-align: middle;"> 
+                            <span style="font-size:150%;color:red;">&hearts;</span> {{likes.length}}
+                            <i style='font-size:120%' class='fas'>&#xf075;</i> {{comments.length}}
+                        </td>
+                        <td>
+                            <button *ngIf="likesFlag" class="btn btnlike" (click)="like()"><span style="font-size:150%;color:white;">&hearts;</span> </button>
+                        </td>
+                    </tr>
+                </table>
+                
+                <div>
+                    <div id="commentsection">
+                        <table class="text-left" style="width: 100%;">
+                            <tr>
+                                <td style="vertical-align: middle;"><div><b>Komentar:</b> <input type="text" [(ngModel)]="text" style="margin-left: 4px;"></div></td>
+                                <td><button (click)="comment()" class="btn btndet">Posalji</button></td>
+                            </tr>
+                        </table>
+                        
+                         
+                    </div>
+                    <hr>
+                    <div class="comms overflow-auto">
+                        <div  *ngFor="let c of comments">
+                            <table id="onemsg">
+                                <tr>
+                                    <td></td>
+                                    <td style="font-size: smaller;"><b>{{c.username}}</b> {{c.date | date : 'dd-MM-yyyy HH:mm'}}</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="imgs" ><img class="rounded-circle" [src]="c.photo== '' ? '../../assets/profile_picture.jpg' : c.photo" width="30px" height="30px">
+                                    </td>
+                                    <td style="vertical-align: middle; padding-left: 10px; padding-right: 10px; background-color: #ffd5c2;  border-radius: 5px;">{{c.text}}</td>
+                                </tr>
+                                
+                                
+                            </table>
+                        </div>
+                    </div>
+                    
+                
+                    
+                </div>
+            <!-- </div> -->
+            <div *ngIf="sendingMessage">
+                <div class="card text-center" id="chat">
+                    <div class="card-header" id="chathdr">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 90%; vertical-align: middle;"><span id="chatorg"> <b>{{workshop.organizer}}</b> </span></td>
+                                <td><button (click)="closeChat()" id="close" class="btn btn-danger"><span aria-hidden="true">&times;</span></button></td>
+                            </tr>
+                        </table>
+                      
+                    </div>
+                    <div class="card-body overflow-auto" id="msgs">
+                      <div *ngFor="let m of messages" [class]="user.username == m.sender ? 'goleft' : 'goright'">
+                        <table id="onemsg">
+                            <tr>
+                                <td *ngIf="user.username == m.sender" ></td>
+                                <td style="font-size: smaller;"><b>{{m.sender}}</b> {{m.date | date : 'dd-MM-yyyy HH:mm'}}</td>
+                                <td *ngIf="user.username != m.sender" ></td>
+                            </tr>
+                            <tr>
+                                <td class="imgs" *ngIf="user.username == m.sender" ><img class="rounded-circle" [src]="user.photo== '' ? '../../assets/profile_picture.jpg' : user.photo" width="30px" height="30px">
+                                </td>
+                                <td style="vertical-align: middle; padding-left: 10px; padding-right: 10px; background-color: #ffd5c2;  border-radius: 5px;">{{m.text}}</td>
+                                <td class="imgs" *ngIf="user.username != m.sender" ><img class="rounded-circle" [src]="organizer.photo== '' ? '../../assets/profile_picture.jpg' : organizer.photo" width="30px" height="30px">
+                                </td>
+                            </tr>
+                            
+                            
+                        </table>
+                        
+                        
+                      </div>
+                    </div>
+                    <div class="card-footer text-muted" id="chatftr">
+                        <table>
+                            <tr>
+                                <td style="vertical-align: middle;"><div id="msginput"><span>Nova poruka:</span> <input type="text" [(ngModel)]="message" style="margin-left: 5px;"></div></td>
+                                <td><button (click)="sendMessage()" class="btn btndet">Posalji</button></td>
+                            </tr>
+                        </table>
+                        
+                         
+                    </div>
+                  </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div *ngIf="updateInProgress" class="col-lg-12" id="updcont">
+        <div id="updform">
+            <table>
+                <tr>
+                    <td class="upd"><b>Naziv:</b></td>
+                    <td class="upd"><input type="text" [(ngModel)]="changes.name"></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Datum odrzavanja:</b></td>
+                    <td class="upd"><input type="datetime" [(ngModel)]="changes.date"></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Mesto odrzavanje:</b></td>
+                    <td class="upd"><input type="text" [(ngModel)]="changes.place"></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Kratak opis:</b></td>
+                    <td class="upd"><input type="text" [(ngModel)]="changes.shortDescr"></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Duzi opis:</b></td>
+                    <td class="upd"><textarea cols="30" rows="5" [(ngModel)]="changes.longDescr"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Glavna slika:</b></td>
+                    <td class="upd">
+                        <input type="file" id="photo" (change)="getPhoto($event, 0)" #fileUploadConvert />
+                        <label for="photo"
+                            class="coverlabel">
+                            Dodaj sliku
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(0)" [disabled]="changes.mainPhoto ==''"><span class='bi bi-trash-fill'></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="upd"><b>Dodatne slike:</b></td>
+                    <td class="upd">
+                        <input type="file" id="photo1" (change)="getPhoto($event, 1)" #fileUploadConvert />
+                        <label for="photo1"
+                            class="coverlabel">
+                            Dodaj sliku 1
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(1)" [disabled]="photo1 ==''"><span class='bi bi-trash-fill'></span></button>
+                         <br>
+                        <input type="file" id="photo2" (change)="getPhoto($event, 2)" #fileUploadConvert />
+                        <label for="photo2"
+                            class="coverlabel">
+                            Dodaj sliku 2
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(2)" [disabled]="photo2 ==''"><span class='bi bi-trash-fill'></span></button>
+                        <br>
+                        <input type="file" id="photo3" (change)="getPhoto($event, 3)" #fileUploadConvert />
+                        <label for="photo3"
+                            class="coverlabel">
+                            Dodaj sliku 3
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(3)" [disabled]="photo3 ==''"><span class='bi bi-trash-fill'></span></button>
+                        <br>
+                        <input type="file" id="photo4" (change)="getPhoto($event, 4)" #fileUploadConvert />
+                        <label for="photo4"
+                            class="coverlabel">
+                            Dodaj sliku 4
+                        </label>
+                        <button class="btn btn-danger del" (click)="remove(4)" [disabled]="photo4 ==''"><span class='bi bi-trash-fill'></span></button>
+                        <br>
+                        <input type="file" id="photo5" (change)="getPhoto($event, 5)" #fileUploadConvert />
+                        <label for="photo5"
+                            class="coverlabel">
+                            Dodaj sliku 5
+                        </label> 
+                        <button class="btn btn-danger del" (click)="remove(5)" [disabled]="photo5 ==''"><span class='bi bi-trash-fill'></span></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="upd text-center" >
+                        <button class="btn btndet" (click)="updateWorksh()">Azuriraj</button> <button class="btn btn-danger" (click)="discard()">Otkazi</button> <br>
+                        {{msg}}
+                    </td>
+            </table>
+        </div>
+       
+    </div>
+</div>
+

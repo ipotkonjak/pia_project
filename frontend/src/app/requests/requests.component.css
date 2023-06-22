@@ -1,0 +1,75 @@
+table {
+    margin: 0 auto;
+    width: 80%;
+}
+.cont {
+    max-height: 200px;
+}
+.addadmin {
+    text-align: right;
+}
+
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #ffd5c2; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-y: auto;
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  }
+
+  li {
+    background-color: #ffd5c2;
+  }
+  
+  .active {
+    background-color: #c8553d;
+    border-color: #c8553d;
+  }
+
+  .closebtn {
+    width: fit-content;
+    height: fit-content;
+    margin-right: 15px;
+    background-color: white;
+  }
+
+  tr.colors:nth-child(odd){
+    background-color: #F7B881;
+}
+tr.colors:nth-child(even){
+    background-color: #F9C89D;
+}
+
+#requests {
+    background-color: #ffd5c2;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 5px;
+    padding: 5px;
+    width: 70%;
+}
+
+.btndet {
+    background: #588b8b;
+    color: white;
+    margin-right: 2px;
+}
+.btndet:hover{
+    background: #79A9A9;
+}
+
+.btnlike {
+    background-color: #c8553d;
+    border-color: #c8553d;
+    color: white;
+    margin-left: 2px;
+}
+.btnlike:hover{
+    background: #9F402D;
+}

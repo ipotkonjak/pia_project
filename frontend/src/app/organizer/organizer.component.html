@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-lg-2"  style="padding-left: 2px; padding-right: 2px;">
+        <ul class="list-group">
+            <li class="list-group-item disabled">Moje radionice</li>
+            <button type="button" class="list-group-item mybtn" *ngFor="let w of workshops" [class]="chosen != null && w.idW == chosen.idW ? 'active' : ''" (click)="selectWorksh(w)">
+               
+                <img [src]="w.mainPhoto" height="50px" width="50px" class="rounded">
+                <div>{{w.name}} <i class="bi bi-arrow-right" *ngIf="chosen != null && w.idW == chosen.idW ? 'active' : ''"></i></div>
+                
+            </button>
+        </ul>
+    </div>
+    <div class="col-lg-2" style="padding-left: 2px; padding-right: 2px;">
+        <ul class="list-group">
+            <li class="list-group-item disabled">Razgovori</li>
+            <button type="button" class="list-group-item mybtn" *ngFor="let c of chats" (click)="showChat(c)">
+                <img [src]="c.participantPhoto== '' ? '../../assets/profile_picture.jpg' : c.participantPhoto" height="50px" width="50px" class="rounded">
+                {{c.participant}}
+            </button>
+        </ul>
+    </div>
+    <div class="col-lg-8">
+        <div class="card text-center" id="chat" *ngFor="let c of toShow">
+            <div class="card-header" id="chathdr">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 90%; vertical-align: middle;"><span id="chatorg"> <b>{{c.participant}}</b> </span></td>
+                        <td><button (click)="closeChat(c.participant)" id="close" class="btn btn-danger"><span aria-hidden="true">&times;</span></button></td>
+                    </tr>
+                </table>
+              
+            </div>
+            <div class="card-body overflow-auto" id="msgs">
+                <div *ngFor="let m of c.messages" [class]="user.username == m.sender ? 'goleft' : 'goright'">
+                  <table id="onemsg">
+                      <tr>
+                          <td *ngIf="user.username == m.sender" ></td>
+                          <td style="font-size: smaller;"><b>{{m.sender}}</b> {{m.date | date : 'dd-MM-yyyy HH:mm'}}</td>
+                          <td *ngIf="user.username != m.sender" ></td>
+                      </tr>
+                      <tr>
+                          <td class="imgs" *ngIf="user.username == m.sender" ><img class="rounded-circle" [src]="user.photo== '' ? '../../assets/profile_picture.jpg' : user.photo" width="30px" height="30px">
+                          </td>
+                          <td style="vertical-align: middle; padding-left: 10px; padding-right: 10px; background-color: #ffd5c2;  border-radius: 5px;">{{m.text}}</td>
+                          <td class="imgs" *ngIf="user.username != m.sender" ><img class="rounded-circle" [src]="c.participantPhoto== '' ? '../../assets/profile_picture.jpg' : c.participantPhoto" width="30px" height="30px">
+                          </td>
+                      </tr>
+                      
+                      
+                  </table>
+                  
+                  
+                </div>
+              </div>
+              <div class="card-footer text-muted" id="chatftr">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="vertical-align: middle;"><div id="msginput"><span>Nova poruka:</span> <input type="text" [(ngModel)]="c.new_message" style="margin-left: 5px;"></div></td>
+                        <td><button (click)="sendMessage(c.participant, c.new_message)" class="btn btndet">Posalji</button></td>
+                    </tr>
+                </table>
+                
+                 
+            </div>
+            
+          </div>
+    </div>
+</div>
